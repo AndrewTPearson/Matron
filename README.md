@@ -31,6 +31,7 @@ A matching app linking parents with babysitters and childminders
 Front end:
 * React Native
 * Tailwind
+
 Back end:
 * MVC in node.js
 * Koa
