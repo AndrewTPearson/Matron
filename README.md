@@ -33,6 +33,5 @@ Front end:
 * Tailwind
 
 Back end:
-* MVC in node.js
 * Koa
 * Graph database (platform TBC - looking at Amazon Neptune, ArangoDB, Neo4j, TypeDB)
