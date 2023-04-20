@@ -21,11 +21,16 @@
 //  sendMessage (POST) -> conversations
 
 import Router from 'koa-router';
+import { users } from './controllers/users';
 
 const router = new Router();
 
 router.get('/', async (ctx, next) => {
-  ctx.body = {msg: 'Hello world!'};
+  ctx.status = 200;
+  ctx.body = 'Hello world!';
 })
+  .post('/login', users.login)
+  .post('/createAccount', users.createAccount)
+
 
 export default router

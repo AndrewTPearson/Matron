@@ -6,9 +6,7 @@ import { PORT } from './config/config';
 import router from './router';
 
 const app = new Koa();
-app.use(bodyparser)
-  .use(async ctx => {
-  ctx.body = ctx.request.body;
-})
-  .use(router.routes)
+app
+  .use(bodyparser())
+  .use(router.routes())
   .listen(PORT, () => console.log(`Listening at localhost:${PORT}`));
