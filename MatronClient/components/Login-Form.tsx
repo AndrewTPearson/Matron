@@ -2,20 +2,20 @@ import {StyleSheet, View, Text, TextInput} from 'react-native';
 import { useState } from 'react';
 import { Button, Alert } from 'react-native';
 
-export default function LoginForm ({ loginFunc }: { loginFunc: ()=> void }) {
-  const [newUsername, setNewUsername] = useState('');
+export default function LoginForm ({ loginFunc }: { loginFunc: (arg: string)=> void }) {
+  const [username, setUsername] = useState('');
 
   return (
     <View style={styles.formContainer}>
       <Text style={styles.text}>Log in as existing user:</Text>
       <TextInput
-        value={newUsername}
-        onChangeText={setNewUsername}
+        value={username}
+        onChangeText={setUsername}
         style={styles.inputArea}
         />
       <Button
-        title='Login as existing user'
-        onPress={loginFunc}
+        title='Login as an existing user'
+        onPress={() => loginFunc(username)}
       />
     </View>
   );

@@ -11,7 +11,7 @@
 // log out
 
 import Koa from 'koa';
-import { createAccount, createUserFromUsername, verifyUsername } from '../mockModels/mockUsersDB';
+import { createAccount, createUserFromUsername, getUserLimitedDetails, IDfromUsername, verifyUsername } from '../mockModels/mockUsersDB';
 
 export const users = {
   // login: () => {
@@ -30,6 +30,22 @@ export const users = {
     let newUser = createUserFromUsername(ctx.request.body.username);
     createAccount(newUser);
     ctx.status = 201;
-    ctx.body = 'Account created!';
+    ctx.body = {
+      username: newUser.username,
+      ID: newUser.ID
+    }
+  },
+  miniProfile: (ctx: any) => {
+    console.log(ctx.request.body.ID);
+    ctx.status = 200;
+    ctx.body = getUserLimitedDetails(ctx.request.body.ID);
+  },
+  // NB The immediately above function is currently untested
+  attemptLogin: (ctx: any) => {
+    let name = ctx.request.body.username
+    let accepted = verifyUsername(name);
+    [ctx.status, ctx.body] = accepted ? [200, getUserLimitedDetails(IDfromUsername(name))]
+      : [401, {msg: 'No user found'}];
+    if (accepted) console.log('login successful');
   }
 }

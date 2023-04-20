@@ -1,6 +1,13 @@
 import { User } from "../types/user";
 
-const users: User[] = [];
+const users: User[] = [
+  {
+    ID: 0,
+    username: 'Andrew',
+    isParent: false,
+    isCarer: false
+  }
+];
 
 export function createUserFromUsername (username: string) {
   return {
@@ -12,7 +19,14 @@ export function createUserFromUsername (username: string) {
 }
 export function createAccount (user: User) {
   users.push(user);
+  console.log('Added new user: ', user)
   return true;
+}
+export function IDfromUsername (username: string) {
+  let index = users.findIndex((user) => {
+    return username === user.username;
+  });
+  return users[index].ID;
 }
 export function verifyUsername (username: string) {
   let index = users.findIndex((user) => {
@@ -36,3 +50,4 @@ export function getUserLimitedDetails (userID: number) {
     username: user.username
   }
 }
+  // NB The immediately above function is currently untested

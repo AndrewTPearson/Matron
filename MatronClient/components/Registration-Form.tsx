@@ -2,7 +2,7 @@ import {StyleSheet, View, Text, TextInput} from 'react-native';
 import { useState } from 'react';
 import { Button, Alert } from 'react-native';
 
-export default function RegistrationForm ({registerFunc } : {registerFunc: () => void}) {
+export default function RegistrationForm ({registerFunc } : {registerFunc: (arg: string) => void}) {
   const [newUsername, setNewUsername] = useState('');
 
   return (
@@ -15,7 +15,7 @@ export default function RegistrationForm ({registerFunc } : {registerFunc: () =>
         />
       <Button
         title='Confirm new account'
-        onPress={registerFunc}
+        onPress={() => registerFunc(newUsername)}
       />
     </View>
   );

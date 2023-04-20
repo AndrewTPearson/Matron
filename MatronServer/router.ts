@@ -1,6 +1,6 @@
 // Server router. Routes to include (with controller indicated)
-//  viewFullProfile (GET) -> users
-//  viewMiniProfile (GET) -> users
+//  fullProfile (GET) -> users
+//  miniProfile (GET) -> users
 //  login (POST) -> users
 //  logout (POST) -> users
 //  createAccount (POST) -> users
@@ -26,11 +26,13 @@ import { users } from './controllers/users';
 const router = new Router();
 
 router.get('/', async (ctx, next) => {
+  console.log('test received');
   ctx.status = 200;
   ctx.body = 'Hello world!';
 })
-  .post('/login', users.login)
-  .post('/createAccount', users.createAccount)
+  .get('/miniProfile', users.miniProfile)
+  .post('/login', users.attemptLogin)
+  .post('/createAccount', users.createAccount);
 
 
 export default router
