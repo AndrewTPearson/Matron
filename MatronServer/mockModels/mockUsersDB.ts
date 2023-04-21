@@ -47,7 +47,9 @@ export function getUserLimitedDetails (userID: number) {
   let user = users[index];
   return {
     ID: user.ID,
-    username: user.username
+    username: user.username,
+    isParent: user.isParent,
+    isCarer: user.isCarer
   }
 }
   // NB The immediately above function is currently untested

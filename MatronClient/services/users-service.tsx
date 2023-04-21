@@ -21,8 +21,9 @@ export async function createUser (username: string) {
     console.log('there was an error:', error);
   });
   let newUser = await result.json();
-  console.log(`Created ${newUser.username} as user #${newUser.ID}`);
-  return newUser.ID;
+  // console.log(newUser, 'US');
+  // console.log(`Created ${newUser.username} as user #${newUser.ID}`, 'US');
+  return newUser;
 }
 export async function getUserKeyDetails (ID: number) {
   let body = JSON.stringify({ID: ID});
@@ -54,6 +55,5 @@ export async function logIn (username: string) {
     return false;
   }
   let details = await result.json();
-  console.log('details:', details);
   return details;
 }

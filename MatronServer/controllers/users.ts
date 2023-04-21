@@ -30,10 +30,7 @@ export const users = {
     let newUser = createUserFromUsername(ctx.request.body.username);
     createAccount(newUser);
     ctx.status = 201;
-    ctx.body = {
-      username: newUser.username,
-      ID: newUser.ID
-    }
+    ctx.body = newUser
   },
   miniProfile: (ctx: any) => {
     console.log(ctx.request.body.ID);

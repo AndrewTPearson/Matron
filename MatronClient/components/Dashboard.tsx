@@ -1,16 +1,28 @@
-import {StyleSheet, View, Text, Button} from 'react-native';
+// Simple dashboard for navigating to key pages. Appears at the
+// bottom of the page when logged in
 
+import {StyleSheet, View, Text, Button} from 'react-native';
+import {withNavigation} from 'react-navigation';
+import { useNavigation } from '@react-navigation/native';
+
+function DashboardInner({navigation}) {
+  console.log(navigation, 'DB');
+  return (
+    <View style={styles.dashboardContainer}>
+      <Button title='Home' onPress={() => navigation.navigate('LoggedInHome')}/>
+      <Button title='Profile' onPress={() => navigation.navigate('ProfilePage')}/>
+      <Button title='Browse' onPress={()=>console.log('pressed Browse, DB')}/>
+      <Button title='New session'/>
+      <Button title='Conversations'/>
+    </View>
+  );
+}
 
 export default function Dashboard () {
   return (
-    <View style={styles.dashboardContainer}>
-      {/* <Text style={styles.dashboardText}>This is a dashboard</Text> */}
-      <Button title='Messages'/>
-      <Button title='Your sessions'/>
-      <Button title='Browse'/>
-      <Button title='Create'/>
-    </View>
-  );
+    // <></>
+    <DashboardInner navigation={useNavigation()}/>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -24,8 +36,5 @@ const styles = StyleSheet.create({
   dashboardText: {
     color: 'white',
     fontSize: 20
-  },
-  // dashboardButton: {
-  //   margin: 5
-  // }
+  }
 })
