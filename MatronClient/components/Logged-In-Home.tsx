@@ -8,7 +8,7 @@ import activeUserSlice from '../redux-slices/activeUserSlice';
 import HeaderWithProfile from './headers/header-with-profile';
 
 
-export function LoggedInHomePage ({route, navigation}) {
+export function LoggedInHomePage ({}) {
   const activeUserDetails = useSelector((state) => state.activeUser.userDetails);
   // console.log('aud:', activeUserDetails, 'LIH');
   return (

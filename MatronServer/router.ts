@@ -8,9 +8,11 @@
 //  removeChild (DELETE) -> users
 //  updateChild (POST) -> users
 
-//  getOffers (GET) -> sessions
+//  getAllOffers (GET) -> sessions
 //  viewUserFutureSessions (GET) -> sessions
 //  viewUserPastSessions (GET) -> sessions
+//  viewUserOffers (POST) -> sessions
+// NB should probably be a get with the id in the params
 //  changeOfferDetails (POST) -> sessions
 //  acceptOffer (POST) -> sessions
 //  createOffer (POST) -> sessions
@@ -22,6 +24,7 @@
 
 import Router from 'koa-router';
 import { users } from './controllers/users';
+import { sessions } from './controllers/sessions';
 
 const router = new Router();
 
@@ -32,7 +35,11 @@ router.get('/', async (ctx, next) => {
 })
   .get('/miniProfile', users.miniProfile)
   .post('/login', users.attemptLogin)
-  .post('/createAccount', users.createAccount);
+  .post('/createAccount', users.createAccount)
+
+  .post('/viewUserOffers', sessions.getParentOffers)
+  .post('/createParentOffer', sessions.createParentOffer);
+
 
 
 export default router

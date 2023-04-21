@@ -1,11 +1,30 @@
+import { Carer } from '../types/carer';
+import { Parent } from '../types/parent';
+import { Session } from '../types/session';
 import { User } from "../types/user";
 
+// const users: Parent|Carer[] = [
 const users: User[] = [
   {
     ID: 0,
     username: 'Andrew',
     isParent: false,
-    isCarer: false
+    isCarer: true,
+    futureSessions: []
+  },
+  {
+    ID: 1,
+    username: 'thedesolateone',
+    isParent: true,
+    isCarer: false,
+    children: [{
+      name: 'Isadora',
+      age: 0,
+      sex: 'female'
+    }],
+    openOffers: [],
+    pastSessions: [],
+    futureSessions: []
   }
 ];
 
@@ -53,3 +72,26 @@ export function getUserLimitedDetails (userID: number) {
   }
 }
   // NB The immediately above function is currently untested
+export function addParentOpenOffer (offer: Session, parentID: number) {
+  // console.log('parentID:', typeof parentID, parentID, 'mockUsersDB');
+  let index = users.findIndex((user) => {
+    // console.log('userID', typeof user.ID, user.ID);
+    return user.ID === +parentID;
+  });
+  // console.log('index:', index, 'mockUsersDB');
+  let user = users[index];
+  // console.log(user, 'user in mockUsersDB');
+  user.openOffers?.push(offer);
+  return true;
+}
+export function getParentOpenOffers (parentID: number) {
+  let user = users.find(user=>user.ID=== +parentID)
+  if (user?.openOffers) {return user.openOffers;}
+  else
+  {return false;}
+}
+export function getParentConfirmedSessions (parentID: number) {
+  let user = users.find(user=>user.ID===parentID)
+  if (user?.openOffers) return user.openOffers;
+  return false;
+}

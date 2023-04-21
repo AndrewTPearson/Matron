@@ -1,13 +1,13 @@
 import { BASEURL } from "./services-config";
 
 // to cover functions:
-// create new account
-// view mini profile
-// view full profile
+// create new account (DONE)
+// get user key details
+// get all user details
 // add a child
 // remove a child
 // change a child details
-// log in
+// log in (DONE)
 
 export async function createUser (username: string) {
   let body = JSON.stringify({username: username});
