@@ -2,7 +2,7 @@ import { BASEURL } from "./services-config";
 
 // to cover functions:
 // create new account (DONE)
-// get user key details
+// get user key details (DONE)
 // get all user details
 // add a child
 // remove a child

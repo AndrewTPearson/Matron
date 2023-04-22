@@ -1,10 +1,11 @@
-import { sessionSummary } from "./session-summary"
+import { SessionSummary, sessionSummary } from "./session-summary"
 import {View, Text} from 'react-native';
 
 export function SessionsList ({sessions}) {
+  // console.log(sessions, "SL");
 
   const sessionsList = sessions.map((session) => {
-    return sessionSummary(session);
+    return (<SessionSummary session={session} />);
   })
 
   return (

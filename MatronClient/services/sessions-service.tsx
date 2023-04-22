@@ -29,4 +29,14 @@ export async function createSessionFromParent (sessionDetails) {
   });
   let newSession = await result.json();
   console.log(newSession, 'SS');
+  return newSession;
+}
+export async function getAllOpenOffers () {
+  let result = await fetch(BASEURL + '/getAllOffers')
+    .catch(function (error) {
+      console.log('there was an error:', error);
+    });
+    let openOffers = await result.json();
+    // console.log(openOffers, 'SS');
+    return openOffers;
 }

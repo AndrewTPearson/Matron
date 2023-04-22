@@ -8,8 +8,8 @@
 // view a user's future sessions and offers
 // view a user's past sessions
 
-import { createOfferFromParent } from "../mockModels/mockSessionsDB";
-import { addParentOpenOffer, getParentOpenOffers } from "../mockModels/mockUsersDB";
+import { createOfferFromParent, getAllOpenOffers } from "../mockModels/mockSessionsDB";
+import { addParentOpenOffer, getParentConfirmedSessions, getParentOpenOffers } from "../mockModels/mockUsersDB";
 import { Session } from "../types/session";
 
 export const sessions = {
@@ -26,5 +26,18 @@ export const sessions = {
     let offers = getParentOpenOffers(parentID);
     ctx.status = 200;
     ctx.body = offers;
+  },
+  getAllOffersFromParents: async (ctx: any, next: Function) => {
+    // console.log('in server, sessions.ts')
+    let offers = getAllOpenOffers();
+    // console.log(offers, 'sessions.ts');
+    ctx.status = 200;
+    ctx.body = offers;
+  },
+  getUserFutureSessions: async (ctx: any, next: Function) => {
+    let parentID = ctx.request.body.ID;
+    let sessions = getParentConfirmedSessions(parentID);
+    ctx.status = 200;
+    ctx.body = sessions;
   }
 }

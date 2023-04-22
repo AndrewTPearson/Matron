@@ -11,7 +11,7 @@ function DashboardInner({navigation}) {
     <View style={styles.dashboardContainer}>
       <Button title='Home' onPress={() => navigation.navigate('LoggedInHome')}/>
       <Button title='Profile' onPress={() => navigation.navigate('ProfilePage')}/>
-      <Button title='Browse' onPress={()=>console.log('pressed Browse, DB')}/>
+      <Button title='Browse' onPress={()=>navigation.navigate('BrowseOffers')}/>
       <Button title='New session' onPress={()=> navigation.navigate('CreateOffer')}/>
       <Button title='Conversations' onPress={()=>console.log('pressed Conversations, DB')}/>
     </View>

@@ -92,6 +92,6 @@ export function getParentOpenOffers (parentID: number) {
 }
 export function getParentConfirmedSessions (parentID: number) {
   let user = users.find(user=>user.ID===parentID)
-  if (user?.openOffers) return user.openOffers;
+  if (user?.futureSessions) return user.futureSessions;
   return false;
 }

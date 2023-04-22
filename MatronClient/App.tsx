@@ -19,6 +19,7 @@ import { Provider} from 'react-redux';
 import activeUserReducer from './redux-slices/activeUserSlice';
 import FullProfile from './components/profiles/full-profile';
 import { CreateOfferPage } from './components/sessions/create-offer-page';
+import { AllOpenOffersPage } from './components/sessions/all-sessions-page';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,7 @@ export default function App() {
           <Stack.Screen name='RegistrationPage' component={RegistrationForm} />
           <Stack.Screen name='ProfilePage' component={FullProfile} />
           <Stack.Screen name='CreateOffer' component={CreateOfferPage} />
+          <Stack.Screen name='BrowseOffers' component={AllOpenOffersPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

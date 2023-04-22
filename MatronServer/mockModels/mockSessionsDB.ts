@@ -27,3 +27,6 @@ export function createOfferFromParent (offer: incomingOffer) {
   console.log(newOffer);
   return newOffer;
 }
+export function getAllOpenOffers () {
+  return sessions.offersFromParents;
+}
