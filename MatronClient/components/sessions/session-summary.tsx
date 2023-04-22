@@ -1,24 +1,45 @@
 import { Children } from 'react';
 import {View, Text} from 'react-native';
+import { useState, useEffect } from 'react';
 
 export function SessionSummary ({session}) {
   console.log(session, 'SSum');
   console.log(typeof session.children, 'SSum');
+  const [children, setChildren] = useState([]);
 
-  function summariseChildren(children: []) {
-    console.log(children[0], 'inside summarise children SSum');
-    if (!children[0]) {
-      console.log('here');
-      return 'None'};
+  useEffect(() => {
+    async function getChildren() {
+      // let childs = await session.children.json();
+      // console.log(childs);
+      // console.log(typeof childs);
+      // setChildren(childs);
+    }
+    getChildren()}, []);
+  
 
-  }
-  const children = summariseChildren(session.children);
-  console.log(children, 'SSum');
+  // function summariseChildren(children: []) {
+  //   console.log(children, 'inside summarise children SSum');
+  //   if (!children[0]) {
+  //     console.log('here');
+  //     return 'None'};
+  // }
+  // const children2 = summariseChildren(children);
+  // console.log(children2, 'SSum');
 
   return (
     <View>
+      <View
+        style={{
+          borderBottomColor: 'black',
+          borderBottomWidth: 1,
+          width: '80%',
+          alignSelf: 'center'
+        }}
+      />
       <Text>Parent: {session.parent}</Text>
       <Text>Children: {children}</Text>
+      <Text>Start time: {session.startTime}</Text>
+      <Text>Start time: {session.endTime}</Text>
     </View>
   )
 }

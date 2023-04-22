@@ -3,6 +3,8 @@ import { Text, View } from 'react-native';
 import { SessionsList } from "./sessions-list";
 import { BASEURL } from "../../services/services-config";
 import { useEffect, useState } from "react";
+import HeaderWithProfile from "../headers/header-with-profile";
+import Dashboard from "../Dashboard";
 
 export function AllOpenOffersPage () {
   const [openOffers, setOpenOffers] = useState([]);
@@ -20,8 +22,10 @@ export function AllOpenOffersPage () {
   // console.log('in open offers page, ASP')
   return (
     <View>
+      <HeaderWithProfile/>
       <Text>In open offers page. Placeholder for sessions is an empty array</Text>
       <SessionsList sessions={openOffers} />
+      <Dashboard/>
     </View>
   )
 }
