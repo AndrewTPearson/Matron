@@ -6,14 +6,14 @@ import {withNavigation} from 'react-navigation';
 import { useNavigation } from '@react-navigation/native';
 
 function DashboardInner({navigation}) {
-  console.log(navigation, 'DB');
+  // console.log(navigation, 'DB');
   return (
     <View style={styles.dashboardContainer}>
       <Button title='Home' onPress={() => navigation.navigate('LoggedInHome')}/>
       <Button title='Profile' onPress={() => navigation.navigate('ProfilePage')}/>
       <Button title='Browse' onPress={()=>console.log('pressed Browse, DB')}/>
-      <Button title='New session'/>
-      <Button title='Conversations'/>
+      <Button title='New session' onPress={()=> navigation.navigate('CreateOffer')}/>
+      <Button title='Conversations' onPress={()=>console.log('pressed Conversations, DB')}/>
     </View>
   );
 }

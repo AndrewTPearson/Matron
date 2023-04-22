@@ -2,9 +2,9 @@ import {StyleSheet, View, Text, TextInput} from 'react-native';
 import { useState } from 'react';
 import { Button, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { newActiveUser } from '../redux-slices/activeUserSlice';
-import { createUser } from '../services/users-service';
-import HeaderNoProfile from './headers/header-no-profile';
+import { newActiveUser } from '../../redux-slices/activeUserSlice';
+import { createUser } from '../../services/users-service';
+import HeaderNoProfile from '../headers/header-no-profile';
 
 export default function RegistrationForm ({navigation}) {
   const dispatch = useDispatch();
@@ -30,6 +30,10 @@ export default function RegistrationForm ({navigation}) {
       <Button
         title='Confirm new account'
         onPress={handleNewAccountCreation}
+      />
+      <Button
+        title='Back to home'
+        onPress={() => navigation.navigate('LoggedOutHome')}
       />
     </View>
   );

@@ -7,17 +7,18 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 import Dashboard from './components/Dashboard';
-import LoginForm from './components/Login-Form';
-import RegistrationForm from './components/Registration-Form';
+import LoginForm from './components/loggedout/Login-Form';
+import RegistrationForm from './components/loggedout/Registration-Form';
 import { createUser, logIn } from './services/users-service';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LoggedInHomePage } from './components/Logged-In-Home';
-import { LoggedOutHomePage } from './components/Logged-Out-Home';
+import { LoggedOutHomePage } from './components/loggedout/Logged-Out-Home';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider} from 'react-redux';
 import activeUserReducer from './redux-slices/activeUserSlice';
 import FullProfile from './components/profiles/full-profile';
+import { CreateOfferPage } from './components/sessions/create-offer-page';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,7 +45,7 @@ export default function App() {
           <Stack.Screen name='LogInPage' component={LoginForm} />
           <Stack.Screen name='RegistrationPage' component={RegistrationForm} />
           <Stack.Screen name='ProfilePage' component={FullProfile} />
-
+          <Stack.Screen name='CreateOffer' component={CreateOfferPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

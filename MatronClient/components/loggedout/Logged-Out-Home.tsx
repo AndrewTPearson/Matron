@@ -1,9 +1,9 @@
 import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 import LoginForm from './Login-Form';
 import RegistrationForm from './Registration-Form';
-import { createUser, logIn } from '../services/users-service';
+import { createUser, logIn } from '../../services/users-service';
 import { useState } from 'react';
-import HeaderNoProfile from './headers/header-no-profile';
+import HeaderNoProfile from '../headers/header-no-profile';
 
 
 export function LoggedOutHomePage ({navigation}) {

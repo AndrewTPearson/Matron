@@ -1,10 +1,10 @@
 import {StyleSheet, View, Text, TextInput} from 'react-native';
 import { useState } from 'react';
 import { Button, Alert } from 'react-native';
-import { logIn } from '../services/users-service';
+import { logIn } from '../../services/users-service';
 import { useDispatch, useSelector } from 'react-redux';
-import { newActiveUser } from '../redux-slices/activeUserSlice';
-import HeaderNoProfile from './headers/header-no-profile';
+import { newActiveUser } from '../../redux-slices/activeUserSlice';
+import HeaderNoProfile from '../headers/header-no-profile';
 
 
 export default function LoginForm ({navigation}) {
