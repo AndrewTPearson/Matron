@@ -40,6 +40,8 @@ router.get('/', async (ctx, next) => {
   // tested
   .post('/createAccount', users.createAccount)
   // tested
+  .post('/createNewChild', users.createNewChild)
+  // yet to exist
 
   .get('/getAllOffers', sessions.getAllOffersFromParents)
   // tested

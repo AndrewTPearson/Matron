@@ -4,6 +4,7 @@
 import {StyleSheet, View, Text, Button} from 'react-native';
 import {withNavigation} from 'react-navigation';
 import { useNavigation } from '@react-navigation/native';
+import React from 'react';
 
 function DashboardInner({navigation}) {
   // console.log(navigation, 'DB');

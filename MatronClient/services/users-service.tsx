@@ -1,5 +1,8 @@
 import { BASEURL } from "./services-config";
 
+
+
+
 // to cover functions:
 // create new account (DONE)
 // get user key details (DONE)
@@ -10,8 +13,8 @@ import { BASEURL } from "./services-config";
 // log in (DONE)
 
 export async function createUser (username: string) {
-  let body = JSON.stringify({username: username});
-  let result = await fetch(BASEURL + '/createAccount', {
+  const body = JSON.stringify({username: username});
+  const result = await fetch(BASEURL + '/createAccount', {
     method: 'POST',
     headers: {
       "Content-type": "application/json"
@@ -20,14 +23,14 @@ export async function createUser (username: string) {
   }).catch(function (error) {
     console.log('there was an error:', error);
   });
-  let newUser = await result.json();
+  const newUser = await result.json();
   // console.log(newUser, 'US');
   // console.log(`Created ${newUser.username} as user #${newUser.ID}`, 'US');
   return newUser;
 }
 export async function getUserKeyDetails (ID: number) {
-  let body = JSON.stringify({ID: ID});
-  let result = await fetch(BASEURL + '/miniProfile', {
+  const body = JSON.stringify({ID: ID});
+  const result = await fetch(BASEURL + '/miniProfile', {
     method: 'GET',
     headers: {
       "Content-type": "application/json"
@@ -37,12 +40,14 @@ export async function getUserKeyDetails (ID: number) {
     console.log('there was an error:', error);
   });
   let userDetails = await result.json();
+  // console.log(userDetails);
   return userDetails;
 }
   // NB The immediately above function is currently untested
 export async function logIn (username: string) {
-  let body = JSON.stringify({username: username});
-  let result = await fetch(BASEURL + '/login', {
+  console.log('here, US');
+  const body = JSON.stringify({username: username});
+  const result = await fetch(BASEURL + '/login', {
     method: 'POST',
     headers: {
       "Content-type": "application/json"
@@ -54,6 +59,30 @@ export async function logIn (username: string) {
   if (result.status === 401) {
     return false;
   }
-  let details = await result.json();
+  const details = await result.json();
   return details;
+}
+export async function createNewChild (parentID, child) {
+  console.log('in User Service', parentID, child);
+  const body = JSON.stringify({parentID:parentID, child:child});
+  console.log(body, 'body in US');
+  const result = await fetch(BASEURL + '/createNewChild', {
+    method: 'POST',
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: body
+  }).catch(function (error) {
+    console.log('there was an error:', error);
+  });
+  if (result.status === 401) {
+    return false;
+  }
+  const details = await result.json();
+  console.log(details, 'in US, returned from server');
+  
+  return details;
+}
+export async function modifyChild (parentID, childDetails, childID) {
+  
 }

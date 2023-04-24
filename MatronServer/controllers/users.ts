@@ -11,21 +11,21 @@
 // log out
 
 import Koa from 'koa';
-import { createAccount, createUserFromUsername, getUserLimitedDetails, IDfromUsername, verifyUsername } from '../mockModels/mockUsersDB';
+import { addNewChild, createAccount, createUserFromUsername, getUserLimitedDetails, IDfromUsername, verifyUsername } from '../mockModels/mockUsersDB';
 
 export const users = {
   // login: () => {
   // login: (ctx, next) => {
   // login: (ctx: Koa.ctx, next: Function) => {
-  login: (ctx: any, next: Function) => {
-    if (verifyUsername(ctx.request.body.username)) {
-      ctx.status = 200;
-      ctx.body = 'Logged in';
-    } else {
-      ctx.status = 401;
-      ctx.body = 'Not authorised';
-    }
-  },
+  // login: (ctx: any, next: Function) => {
+  //   if (verifyUsername(ctx.request.body.username)) {
+  //     ctx.status = 200;
+  //     ctx.body = 'Logged in';
+  //   } else {
+  //     ctx.status = 401;
+  //     ctx.body = 'Not authorised';
+  //   }
+  // },
   createAccount: (ctx: any) => {
     let newUser = createUserFromUsername(ctx.request.body.username);
     createAccount(newUser);
@@ -39,10 +39,19 @@ export const users = {
   },
   // NB The immediately above function is currently untested
   attemptLogin: (ctx: any) => {
-    let name = ctx.request.body.username
+    // console.log('in server, login attempt, users controller');
+    let name = ctx.request.body.username;
     let accepted = verifyUsername(name);
     [ctx.status, ctx.body] = accepted ? [200, getUserLimitedDetails(IDfromUsername(name))]
       : [401, {msg: 'No user found'}];
     if (accepted) console.log('login successful');
+  },
+  createNewChild: (ctx: any) => {
+    console.log('in server create new child, users.ts');
+    let [parentID, child] = [ctx.request.body.parentID, ctx.request.body.child];
+    console.log('parent ID and child:', parentID, child, 'controller');
+    const result = addNewChild(parentID, child);
+    ctx.status = 201;
+    ctx.body = result;
   }
 }

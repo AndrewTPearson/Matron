@@ -1,6 +1,5 @@
-import { Children } from 'react';
 import {View, Text} from 'react-native';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export function SessionSummary ({session}) {
   console.log(session, 'SSum');

@@ -8,7 +8,7 @@ import { BASEURL } from "./services-config";
 // confirm you are happy with a counteroffer
 
 export async function createSessionFromParent (sessionDetails) {
-  let body = JSON.stringify({
+  const body = JSON.stringify({
     parent: sessionDetails.username,
     ID: sessionDetails.username,
     location: sessionDetails.location,
@@ -18,7 +18,7 @@ export async function createSessionFromParent (sessionDetails) {
     children: sessionDetails.children,
     carerOptions: []
   })
-  let result = await fetch(BASEURL + '/createParentOffer', {
+  const result = await fetch(BASEURL + '/createParentOffer', {
     method: 'POST',
     headers: {
       "Content-type": "application/json"
@@ -27,16 +27,16 @@ export async function createSessionFromParent (sessionDetails) {
   }).catch(function (error) {
     console.log('there was an error:', error);
   });
-  let newSession = await result.json();
+  const newSession = await result.json();
   console.log(newSession, 'SS');
   return newSession;
 }
 export async function getAllOpenOffers () {
-  let result = await fetch(BASEURL + '/getAllOffers')
+  const result = await fetch(BASEURL + '/getAllOffers')
     .catch(function (error) {
       console.log('there was an error:', error);
     });
-    let openOffers = await result.json();
+    const openOffers = await result.json();
     // console.log(openOffers, 'SS');
     return openOffers;
 }

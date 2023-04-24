@@ -4,7 +4,7 @@
 //    ID, whether they are a parent, and whether they are a carer
 
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 import Dashboard from './components/Dashboard';
 import LoginForm from './components/loggedout/Login-Form';
@@ -20,6 +20,7 @@ import activeUserReducer from './redux-slices/activeUserSlice';
 import FullProfile from './components/profiles/full-profile';
 import { CreateOfferPage } from './components/sessions/create-offer-page';
 import { AllOpenOffersPage } from './components/sessions/all-sessions-page';
+import { AddChildPage } from './components/children/add-child-page';
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +49,8 @@ export default function App() {
           <Stack.Screen name='ProfilePage' component={FullProfile} />
           <Stack.Screen name='CreateOffer' component={CreateOfferPage} />
           <Stack.Screen name='BrowseOffers' component={AllOpenOffersPage} />
+          <Stack.Screen name='AddChild' component={AddChildPage} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

@@ -1,4 +1,4 @@
-import { SessionSummary, sessionSummary } from "./session-summary"
+import { SessionSummary } from "./session-summary"
 import {View, Text} from 'react-native';
 
 export function SessionsList ({sessions}) {

@@ -15,13 +15,22 @@ export const activeUserSlice = createSlice({
         ID: action.payload.ID,
         username: action.payload.username,
         isParent: action.payload.isParent,
-        isCarer: action.payload.isCarer
+        isCarer: action.payload.isCarer,
+        children: action.payload.children
       }};
     },
     removeActiveUser: (state) => {
       return [false, {}]
+    },
+    newChild: (state, action) => {
+      let newState = {...state};
+      console.log(newState.userDetails, 'AUS1');
+      console.log(typeof newState.userDetails, 'AUS3');
+      console.log(action, 'AUS2');
+      // newState.userDetails.children.push(action.payload.child);
+      return newState;
     }
   }
 })
-export const {newActiveUser, removeActiveUser} = activeUserSlice.actions
+export const {newActiveUser, removeActiveUser, newChild} = activeUserSlice.actions
 export default activeUserSlice.reducer

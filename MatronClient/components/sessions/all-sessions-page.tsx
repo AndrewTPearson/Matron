@@ -2,7 +2,7 @@ import { getAllOpenOffers } from "../../services/sessions-service";
 import { Text, View } from 'react-native';
 import { SessionsList } from "./sessions-list";
 import { BASEURL } from "../../services/services-config";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderWithProfile from "../headers/header-with-profile";
 import Dashboard from "../Dashboard";
 
