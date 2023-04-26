@@ -1,48 +1,80 @@
-import { Alert, Button, StyleSheet, Text, View, TextInput } from 'react-native';
+import { Alert, Button, Text, View, TextInput } from 'react-native';
 import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
-import { ChildrenList } from '../children/children-list';
+import ChildrenList from '../children/children-list';
+import { Calendar } from '../timing/Calendar';
+import { TimeSelector } from '../timing/TimeSelector';
+import { MockCalendar } from '../timing/MockCalendar';
+import { useNavigation } from '@react-navigation/native';
+import HeaderWithProfile from '../headers/header-with-profile';
+import { styles } from "../../styleSheet";
+
 
 export function CreateOfferPage () {
-  const [offer, setOffer] = useState({
-    parent: useSelector((state) => state.activeUser.userDetails.username),
-    ID: useSelector((state) => state.activeUser.userDetails.ID),
-    location: '',
-    startTime: null,
-    endTime: null,
-    children: []
-  });
-  const allUserChildren = useSelector((state) => state.activeUser.userDetails.children);
-  function handleSubmit () {
-    console.log(offer);
-  }
-
-  function handleChange (property, value) {
-    let newOffer = {
-      parent: offer.parent,
-      ID: offer.ID,
-      location: offer.location,
-      startTime: offer.startTime,
-      endTime: offer.startTime,
-      children: offer.children
-    }
-    newOffer[property] = value;
-    setOffer(newOffer);
-  }
 
   return (
-    <View>
-      <Text>Placeholder inside Create Offer Page</Text>
+    <WrappedCreateOfferPage navigation={useNavigation()} />
+  )
+
+}
+
+function WrappedCreateOfferPage ({navigation}) {
+  // let today = new Date();
+  // const currentDate = {
+  //   day: today.getDate(),
+  //   month: today.getMonth(),
+  //   year: today.getFullYear(),
+  // }
+  const allUserChildren = useSelector((state: any) => state.activeUser.userDetails.children);
+  const [request, setRequest] = useState({
+    children: allUserChildren,
+    location: ''
+  })
+  // const [offer, setOffer] = useState(useSelector((state: any)=>state.newOffer));
+  
+  function handleSubmit () {
+    // setOffer(useSelector((state: any)=>state.newOffer));
+    // console.log(navigation);
+    navigation.navigate('ConfirmRequest', request);
+  }
+  function handleChangeLocation (value) {
+    const newRequest = {...request};
+    newRequest.location = value;
+    setRequest(newRequest);
+  }
+
+  // function handleChange (property, value) {
+  //   console.log("inside function in COP which I don't think is doing anything");
+  //   let newOffer = {
+  //     parent: offer.parent,
+  //     ID: offer.ID,
+  //     location: offer.location,
+  //     startTime: offer.startTime,
+  //     endTime: offer.startTime,
+  //     children: offer.children
+  //   }
+  //   newOffer[property] = value;
+  //   setOffer(newOffer);
+  // }
+  // console.log(allUserChildren, 'COP');
+
+  return (
+    <View style={styles.outerContainer}>
+      <HeaderWithProfile />
+      <Text>Create Offer Page</Text>
       <Text>Location:</Text>
       <TextInput
-        value={offer.location}
+        value={request.location}
         onChangeText={(value)=>{
-          handleChange('location', value)}}
+          handleChangeLocation(value)}}
         />
-      {/* <ChildrenList children={allUserChildren} includeCheckers={true} /> */}
+      <ChildrenList children={allUserChildren} includeCheckers={'Remove'} />
       <Button
-        title='Log the offer to console'
-        onPress={handleSubmit} />
+        title='Choose timing'
+        onPress={handleSubmit}
+        color='#9e1316'
+
+        />
     </View>
   )
 }

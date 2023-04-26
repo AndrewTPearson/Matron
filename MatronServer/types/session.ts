@@ -1,6 +1,7 @@
 import { Parent } from "./parent";
 import { Carer } from './carer';
 import { Child } from "./child";
+import { User } from './user';
 
 export interface Session {
   sessionID: number,
@@ -8,7 +9,7 @@ export interface Session {
   startTime: Date,
   endTime: Date,
   parent: Parent | null,
-  carer: Carer | null,
+  carer: User | null,
   children: Child[],
   carerOptions?: Carer[],
   parentOptions?: Parent[]

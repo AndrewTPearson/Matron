@@ -4,7 +4,13 @@ export const activeUserSlice = createSlice({
   name: 'activeUser',
   initialState: {
     loggedIn: false,
-    userDetails: {}},
+    userDetails: {
+      ID: -1,
+      username: '',
+      isParent: false,
+      isCarer: false,
+      children: []
+    }},
   reducers: {
     newActiveUser: (state, action) => {
       // console.log('logging in with redux, AUS');
@@ -20,15 +26,26 @@ export const activeUserSlice = createSlice({
       }};
     },
     removeActiveUser: (state) => {
-      return [false, {}]
+      return {
+        loggedIn: false,
+        userDetails: {
+          ID: -1,
+          username: '',
+          isParent: false,
+          isCarer: false,
+          children: []
+        }}
     },
-    newChild: (state, action) => {
-      let newState = {...state};
-      console.log(newState.userDetails, 'AUS1');
-      console.log(typeof newState.userDetails, 'AUS3');
-      console.log(action, 'AUS2');
-      // newState.userDetails.children.push(action.payload.child);
-      return newState;
+    newChild: (state, action: {
+      payload: {
+        age: number,
+        childID: number,
+        name: string,
+        sex: string
+      },
+      type: string
+    }) => {
+      state.userDetails.children.push(action.payload);
     }
   }
 })

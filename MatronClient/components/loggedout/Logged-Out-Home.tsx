@@ -4,6 +4,7 @@ import RegistrationForm from './Registration-Form';
 import { createUser, logIn } from '../../services/users-service';
 import { useState } from 'react';
 import HeaderNoProfile from '../headers/header-no-profile';
+import { styles } from '../../styleSheet';
 
 
 export function LoggedOutHomePage ({navigation}) {
@@ -11,16 +12,18 @@ export function LoggedOutHomePage ({navigation}) {
   // const [activeUserId, setActiveUserId] = useState(-1);
   // const [activeUsername, setActiveUsername] = useState('');
   return (
-    <View>
+    <View style={styles.outerContainer}>
       <HeaderNoProfile/>
       <Button
         title='Log in'
         onPress={() => navigation.navigate('LogInPage')}
+        color='#9e1316'
         />
       <Text>OR</Text>
       <Button
         title='Register a new account'
         onPress={() => navigation.navigate('RegistrationPage')}
+        color='#9e1316'
         />
     </View>
   )

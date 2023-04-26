@@ -1,5 +1,6 @@
 export interface Child {
   name: string,
   age: number,
-  sex: string
+  sex: string,
+  childID?: number
 }

@@ -4,7 +4,8 @@ import { View, Text, TextInput, Button } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { createNewChild } from "../../services/users-service";
 import { newChild } from '../../redux-slices/activeUserSlice';
-
+import HeaderWithProfile from "../headers/header-with-profile";
+import { styles } from "../../styleSheet";
 
 export function AddChildPage({route}) {
   return (
@@ -44,7 +45,8 @@ function WrappedAddChildPage({route, navigation}) {
     console.log('in function to modify child, ACP');
   }
   return (
-    <View>
+    <View style={styles.outerContainer}>
+      <HeaderWithProfile />
       <Text>{existing ? 'Modifying child:' : 'Adding new child'}</Text>
       <Text>Name:</Text>
       <TextInput
@@ -64,6 +66,7 @@ function WrappedAddChildPage({route, navigation}) {
         onChangeText={(value)=>handleChange('sex', value)}
         />
       <Button
+        color='#9e1316'
         title='Confirm child details'
         onPress={()=>{
           // console.log(existing, 'existing in ACP');

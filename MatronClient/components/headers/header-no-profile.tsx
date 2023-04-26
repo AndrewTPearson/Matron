@@ -1,29 +1,16 @@
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text} from "react-native"
+import { styles } from '../../styleSheet';
+
+
 
 export default function HeaderNoProfile () {
   return (
-    <View>
+    <View style={styles.headerContainer}>
+      <View style={styles.childSummaryInner}>
       <Text style={styles.title} >MATRON</Text>
-      <Text>Find trusted childcare, anytime, anywhere</Text>
+      {/* <Text  >MATRON</Text> */}
+      <Text style={styles.slogan}>Find trusted childcare, anytime, anywhere</Text>
+      </View>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // marginTop: 40,
-    backgroundColor: 'cyan',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  title: {
-    color: 'black',
-    fontSize: 50
-  },
-  slogan: {
-    color: 'black',
-    fontSize: 12
-  },
-});

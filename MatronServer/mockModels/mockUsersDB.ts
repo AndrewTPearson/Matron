@@ -12,16 +12,15 @@ const users: User[] = [
   {
     ID: 0,
     username: 'Andrew',
-    isParent: false,
-    isCarer: true,
+    openOffers: [],
+    pastSessions: [],
     futureSessions: [],
-    // children: []
+    futureCaring: [],
+    children: []
   },
   {
     ID: 1,
     username: 'thedesolateone',
-    isParent: true,
-    isCarer: false,
     children: [{
       name: 'Isa',
       age: 0,
@@ -30,13 +29,12 @@ const users: User[] = [
     }],
     openOffers: [],
     pastSessions: [],
+    futureCaring: [],
     futureSessions: []
   },
   {
     ID: 2,
     username: 'Ayo',
-    isParent: true,
-    isCarer: false,
     children: [{
       name: 'Fu',
       age: 15,
@@ -61,6 +59,7 @@ const users: User[] = [
   ],
     openOffers: [],
     pastSessions: [],
+    futureCaring: [],
     futureSessions: []
   }
 ];
@@ -69,8 +68,11 @@ export function createUserFromUsername (username: string) {
   return {
     ID: users.length,
     username: username,
-    isParent: false,
-    isCarer: false
+    openOffers: [],
+    pastSessions: [],
+    futureCaring: [],
+    futureSessions: [],
+    children: []
   };
 }
 export function createAccount (user: User) {
@@ -79,6 +81,7 @@ export function createAccount (user: User) {
   return true;
 }
 export function IDfromUsername (username: string) {
+  // console.log(username, 'username in DB');
   let index = users.findIndex((user) => {
     return username === user.username;
   });
@@ -123,13 +126,13 @@ export function addParentOpenOffer (offer: Session, parentID: number) {
   return true;
 }
 export function getParentOpenOffers (parentID: number) {
-  let user = users.find(user=>user.ID=== +parentID)
+  let user = users.find((user)=>{return user.ID===parentID});
   if (user?.openOffers) {return user.openOffers;}
   else
   {return false;}
 }
 export function getParentConfirmedSessions (parentID: number) {
-  let user = users.find(user=>user.ID===parentID)
+  let user = users.find(user=>user.ID==parentID)
   if (user?.futureSessions) return user.futureSessions;
   return false;
 }
@@ -138,6 +141,19 @@ export function addNewChild (parentID: number, child: IncomingNewChild) {
   newChild.childID = users[parentID].children?.length;
   users[parentID].children?.push(newChild);
   return newChild;
+}
+export function updateSessionWithCarer (parentID: number, sessionID: number, carer: User) {
+  const parent = users.find((user) => {return user.ID === parentID});
+  // console.log(users, 'here3');
+  const sessionIndex = parent?.openOffers?.findIndex((session)=>session.sessionID === sessionID);
+  // parent?.openOffers[sessionIndex].carer = carer;
+  if (parent?.openOffers[sessionIndex]) {
+    // console.log('found session in DB');
+    parent.openOffers[sessionIndex].carer = carer;
+  }
+  parent?.futureSessions?.push(parent.openOffers.splice(sessionIndex, 1)[0]);
+  // console.log(parent, 'parent in DB');
+  return true;
 }
 export function modifyChild (parentID: number, child: Child) {
 //   // Look for
@@ -157,3 +173,6 @@ export function modifyChild (parentID: number, child: Child) {
 //   }
 //   return true;
 }
+// The above function caused problems which Kostas and I were unable to solve after half an hour and
+// numerous console.log()s, so have deprioritised giving users the ability to change
+// their existing children

@@ -43,14 +43,15 @@ router.get('/', async (ctx, next) => {
   .post('/createNewChild', users.createNewChild)
   // yet to exist
 
-  .get('/getAllOffers', sessions.getAllOffersFromParents)
   // tested
+  .get('/getAllOffers', sessions.getAllOffersFromParents)
   .post('/viewUserOffers', sessions.getParentOffers)
   // tested
   .post('/createParentOffer', sessions.createParentOffer)
   // tested
-  .post('/viewUserFutureSessions', sessions.getUserFutureSessions);
-  // probably working?
+  .post('/viewUserFutureSessions', sessions.getUserFutureSessions)
+  // tested
+  .post('/volunteer', sessions.volunteer)
 
 
 

@@ -1,10 +1,12 @@
 import { getAllOpenOffers } from "../../services/sessions-service";
-import { Text, View } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { SessionsList } from "./sessions-list";
 import { BASEURL } from "../../services/services-config";
 import React, { useEffect, useState } from "react";
 import HeaderWithProfile from "../headers/header-with-profile";
 import Dashboard from "../Dashboard";
+import { styles } from "../../styleSheet";
+
 
 export function AllOpenOffersPage () {
   const [openOffers, setOpenOffers] = useState([]);
@@ -12,6 +14,7 @@ export function AllOpenOffersPage () {
   useEffect(() => {
     async function fetchOffers() {
       let offers = await getAllOpenOffers();
+      // offers = offers.filter((offer)=>{return !!offer.parent});
       // console.log(offers, 'ASP inside useEffect');
       setOpenOffers(offers);
     }
@@ -21,11 +24,11 @@ export function AllOpenOffersPage () {
   
   // console.log('in open offers page, ASP')
   return (
-    <View>
+    <ScrollView style={styles.outerContainer}>
       <HeaderWithProfile/>
-      <Text>In open offers page. Placeholder for sessions is an empty array</Text>
-      <SessionsList sessions={openOffers} />
+      <SessionsList sessions={openOffers} includeRespondButton={true} />
+      {/* <SessionsList sessions={openOffers} /> */}
       <Dashboard/>
-    </View>
+    </ScrollView>
   )
 }

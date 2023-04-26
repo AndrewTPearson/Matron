@@ -8,16 +8,9 @@ import { BASEURL } from "./services-config";
 // confirm you are happy with a counteroffer
 
 export async function createSessionFromParent (sessionDetails) {
-  const body = JSON.stringify({
-    parent: sessionDetails.username,
-    ID: sessionDetails.username,
-    location: sessionDetails.location,
-    startTime: sessionDetails.startTime,
-    endTime: sessionDetails.endTime,
-    carer: null,
-    children: sessionDetails.children,
-    carerOptions: []
-  })
+  // console.log('in SesSer', sessionDetails);
+  const body = JSON.stringify(sessionDetails);
+  // console.log(body);
   const result = await fetch(BASEURL + '/createParentOffer', {
     method: 'POST',
     headers: {
@@ -28,7 +21,7 @@ export async function createSessionFromParent (sessionDetails) {
     console.log('there was an error:', error);
   });
   const newSession = await result.json();
-  console.log(newSession, 'SS');
+  // console.log(newSession, 'SS');
   return newSession;
 }
 export async function getAllOpenOffers () {
@@ -39,4 +32,49 @@ export async function getAllOpenOffers () {
     const openOffers = await result.json();
     // console.log(openOffers, 'SS');
     return openOffers;
+}
+export async function getParentOffers (parentID) {
+  const result = await fetch(BASEURL + '/viewUserOffers', {
+    method: 'POST',
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify({ID: parentID})
+  })
+    .catch(function (error) {
+      console.log('there was an error:', error);
+    });
+    const openOffers = await result.json();
+    // console.log(openOffers, 'SS');
+    return openOffers;
+}
+export async function getParentConfirmed (parentID) {
+  const result = await fetch(BASEURL + '/viewUserFutureSessions', {
+    method: 'POST',
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify({ID: parentID})
+  })
+    .catch(function (error) {
+      console.log('there was an error:', error);
+    });
+    const confirmedSessions = await result.json();
+    console.log(confirmedSessions, 'SS');
+    return confirmedSessions;
+}
+export async function volunteerAsCarer (carer, sessionID, parent) {
+  console.log(parent, 'in SessionsService, parentID')
+  const result = await fetch(BASEURL + '/volunteer', {
+    method: 'POST',
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify({carer: carer, sessionID: sessionID, parent: parent})
+  }).catch(function (error) {
+    console.log('there was an error:', error);
+  });
+  const response = await result.json();
+  console.log(response);
+  return response;
 }

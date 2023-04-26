@@ -45,7 +45,7 @@ export async function getUserKeyDetails (ID: number) {
 }
   // NB The immediately above function is currently untested
 export async function logIn (username: string) {
-  console.log('here, US');
+  // console.log('here, US');
   const body = JSON.stringify({username: username});
   const result = await fetch(BASEURL + '/login', {
     method: 'POST',

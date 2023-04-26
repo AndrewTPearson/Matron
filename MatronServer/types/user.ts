@@ -4,10 +4,9 @@ import { Session } from "./session";
 export interface User {
   ID: number,
   username: string,
-  isParent: boolean,
-  isCarer: boolean,
-  children?: Child[],
-  openOffers?: Session[],
-  pastSessions?: Session[],
-  futureSessions?: Session[]
+  children: Child[],
+  openOffers: Session[],
+  pastSessions: Session[],
+  futureSessions: Session[],
+  futureCaring: Session[]
 }
