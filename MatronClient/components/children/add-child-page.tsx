@@ -7,25 +7,19 @@ import { newChild } from '../../redux-slices/activeUserSlice';
 import HeaderWithProfile from "../headers/header-with-profile";
 import { styles } from "../../styleSheet";
 
-export function AddChildPage({route}) {
+export function AddChildPage({ route }) {
   return (
     <WrappedAddChildPage route={route} navigation={useNavigation()} />
   )
 }
 
 // export function AddChildPage() {
-function WrappedAddChildPage({route, navigation}) {
+function WrappedAddChildPage({ route, navigation }) {
   const dispatch = useDispatch();
-// export function AddChildPage({route, childToModify}) {
-  // console.log('route params ACP', route.params);
-  const {childToModify, existing} = route.params;
-  // console.log('in AddChildPage', childToModify, existing);
-  const [child, setChild] = useState({childToModify}.childToModify);
-  const parentID = useSelector((state)=> state.activeUser.userDetails.ID)
-  // console.log(parentID);
-  function handleChange (property, value) {
-  // function handleChange (value) {
-    // console.log('here in ACP handle change func 1', value);
+  const { childToModify, existing } = route.params;
+  const [child, setChild] = useState({ childToModify }.childToModify);
+  const parentID = useSelector((state) => state.activeUser.userDetails.ID)
+  function handleChange(property, value) {
     let newChild = {
       name: child.name,
       age: child.age,
@@ -33,15 +27,12 @@ function WrappedAddChildPage({route, navigation}) {
     }
     newChild[property] = value;
     setChild(newChild);
-    // console.log('here in ACP handle change func 2', value);
   }
-  // console.log(child, 'ACP');
-  async function handleNew () {
+  async function handleNew() {
     let addedChild = await createNewChild(parentID, child);
-    console.log('added Child in ACP', addedChild);
     dispatch(newChild(addedChild))
   }
-  function handleModify () {
+  function handleModify() {
     console.log('in function to modify child, ACP');
   }
   return (
@@ -51,30 +42,27 @@ function WrappedAddChildPage({route, navigation}) {
       <Text>Name:</Text>
       <TextInput
         value={child.name}
-        onChangeText={(value)=>handleChange('name', value)}
-        // onChangeText={handleChange}
-        />
+        onChangeText={(value) => handleChange('name', value)}
+      />
       <Text>Child age:</Text>
       <TextInput
         value={child.age}
         keyboardType='numeric'
-        onChangeText={(value)=>handleChange('age', value)}
-        />
+        onChangeText={(value) => handleChange('age', value)}
+      />
       <Text>Child sex:</Text>
       <TextInput
         value={child.sex}
-        onChangeText={(value)=>handleChange('sex', value)}
-        />
+        onChangeText={(value) => handleChange('sex', value)}
+      />
       <Button
         color='#9e1316'
         title='Confirm child details'
-        onPress={()=>{
-          // console.log(existing, 'existing in ACP');
+        onPress={() => {
           existing ? handleModify() : handleNew();
           navigation.navigate('ProfilePage');
         }
         }
-        // onPress={()=>console.log('here in ACP', child)}
       />
     </View>
   )

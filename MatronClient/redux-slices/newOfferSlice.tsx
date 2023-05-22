@@ -28,22 +28,17 @@ export const newOfferSlice = createSlice({
   initialState: emptyOffer,
   reducers: {
     startNewOffer: (state, action) => {
-      let offer = {...state};
+      let offer = { ...state };
       offer.parent = action.payload.parent;
       offer.ID = action.payload.parentID;
       return offer;
     },
     modifyOffer: (state, action) => {
-      // console.log('in modifyOffer, NOS')
-      // console.log(action.payload, 'NOS');
-      let offer = {...state};
+      let offer = { ...state };
       offer[action.payload.param] = action.payload.value;
-      // console.log(offer, 'offer at end of NOS');
       return offer;
     },
     sendOffer: (state, action) => {
-      // console.log('NOS sending a request 1', action);
-      // console.log('NOS sending a request 2', action.payload);
 
       let payload = {
         parent: action.payload.parent,
@@ -55,12 +50,11 @@ export const newOfferSlice = createSlice({
         carer: null,
         carerOptions: []
       }
-      console.log(payload, 'payload sent');
       createSessionFromParent(payload);
       return emptyOffer;
     }
   }
 })
 
-export const {startNewOffer, modifyOffer, sendOffer} = newOfferSlice.actions;
+export const { startNewOffer, modifyOffer, sendOffer } = newOfferSlice.actions;
 export default newOfferSlice.reducer;

@@ -8,27 +8,23 @@ import Dashboard from "../Dashboard";
 import { styles } from "../../styleSheet";
 
 
-export function AllOpenOffersPage () {
+export function AllOpenOffersPage() {
   const [openOffers, setOpenOffers] = useState([]);
 
   useEffect(() => {
     async function fetchOffers() {
       let offers = await getAllOpenOffers();
-      // offers = offers.filter((offer)=>{return !!offer.parent});
-      // console.log(offers, 'ASP inside useEffect');
       setOpenOffers(offers);
     }
     fetchOffers();
   }, []);
 
-  
-  // console.log('in open offers page, ASP')
+
   return (
     <ScrollView style={styles.outerContainer}>
-      <HeaderWithProfile/>
+      <HeaderWithProfile />
       <SessionsList sessions={openOffers} includeRespondButton={true} />
-      {/* <SessionsList sessions={openOffers} /> */}
-      <Dashboard/>
+      <Dashboard />
     </ScrollView>
   )
 }

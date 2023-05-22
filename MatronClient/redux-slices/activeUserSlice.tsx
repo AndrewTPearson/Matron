@@ -10,20 +10,20 @@ export const activeUserSlice = createSlice({
       isParent: false,
       isCarer: false,
       children: []
-    }},
+    }
+  },
   reducers: {
     newActiveUser: (state, action) => {
-      // console.log('logging in with redux, AUS');
-      // console.log(action, 'AUS');
       return {
         loggedIn: true,
         userDetails: {
-        ID: action.payload.ID,
-        username: action.payload.username,
-        isParent: action.payload.isParent,
-        isCarer: action.payload.isCarer,
-        children: action.payload.children
-      }};
+          ID: action.payload.ID,
+          username: action.payload.username,
+          isParent: action.payload.isParent,
+          isCarer: action.payload.isCarer,
+          children: action.payload.children
+        }
+      };
     },
     removeActiveUser: (state) => {
       return {
@@ -34,7 +34,8 @@ export const activeUserSlice = createSlice({
           isParent: false,
           isCarer: false,
           children: []
-        }}
+        }
+      }
     },
     newChild: (state, action: {
       payload: {
@@ -49,5 +50,5 @@ export const activeUserSlice = createSlice({
     }
   }
 })
-export const {newActiveUser, removeActiveUser, newChild} = activeUserSlice.actions
+export const { newActiveUser, removeActiveUser, newChild } = activeUserSlice.actions
 export default activeUserSlice.reducer

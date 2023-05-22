@@ -1,5 +1,5 @@
 import { Alert, Button, Text, View, TextInput } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ChildrenList from '../children/children-list';
 import { Calendar } from '../timing/Calendar';
@@ -10,7 +10,7 @@ import HeaderWithProfile from '../headers/header-with-profile';
 import { styles } from "../../styleSheet";
 
 
-export function CreateOfferPage () {
+export function CreateOfferPage() {
 
   return (
     <WrappedCreateOfferPage navigation={useNavigation()} />
@@ -18,7 +18,7 @@ export function CreateOfferPage () {
 
 }
 
-function WrappedCreateOfferPage ({navigation}) {
+function WrappedCreateOfferPage({ navigation }) {
   // let today = new Date();
   // const currentDate = {
   //   day: today.getDate(),
@@ -31,32 +31,16 @@ function WrappedCreateOfferPage ({navigation}) {
     location: ''
   })
   // const [offer, setOffer] = useState(useSelector((state: any)=>state.newOffer));
-  
-  function handleSubmit () {
+
+  function handleSubmit() {
     // setOffer(useSelector((state: any)=>state.newOffer));
-    // console.log(navigation);
     navigation.navigate('ConfirmRequest', request);
   }
-  function handleChangeLocation (value) {
-    const newRequest = {...request};
+  function handleChangeLocation(value) {
+    const newRequest = { ...request };
     newRequest.location = value;
     setRequest(newRequest);
   }
-
-  // function handleChange (property, value) {
-  //   console.log("inside function in COP which I don't think is doing anything");
-  //   let newOffer = {
-  //     parent: offer.parent,
-  //     ID: offer.ID,
-  //     location: offer.location,
-  //     startTime: offer.startTime,
-  //     endTime: offer.startTime,
-  //     children: offer.children
-  //   }
-  //   newOffer[property] = value;
-  //   setOffer(newOffer);
-  // }
-  // console.log(allUserChildren, 'COP');
 
   return (
     <View style={styles.outerContainer}>
@@ -65,16 +49,17 @@ function WrappedCreateOfferPage ({navigation}) {
       <Text>Location:</Text>
       <TextInput
         value={request.location}
-        onChangeText={(value)=>{
-          handleChangeLocation(value)}}
-        />
+        onChangeText={(value) => {
+          handleChangeLocation(value)
+        }}
+      />
       <ChildrenList children={allUserChildren} includeCheckers={'Remove'} />
       <Button
         title='Choose timing'
         onPress={handleSubmit}
         color='#9e1316'
 
-        />
+      />
     </View>
   )
 }

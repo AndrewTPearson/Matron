@@ -1,12 +1,11 @@
-import { View, Text} from "react-native";
+import { View, Text } from "react-native";
 import MiniProfile from "../profiles/mini-profile";
 import { useSelector } from 'react-redux';
 import { styles } from '../../styleSheet';
 
 
-export default function HeaderWithProfile () {
+export default function HeaderWithProfile() {
   const activeUserDetails = useSelector((state) => state.activeUser.userDetails);
-  // console.log(activeUserDetails, 'HWP');
   return (
     <View style={styles.headerContainer}>
       <View>
