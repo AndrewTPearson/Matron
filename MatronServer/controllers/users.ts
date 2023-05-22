@@ -37,13 +37,11 @@ export const users = {
     ctx.status = 200;
     ctx.body = getUserLimitedDetails(ctx.request.body.ID);
   },
-  // NB The immediately above function is currently untested
   attemptLogin: (ctx: any) => {
-    // console.log('in server, login attempt, users controller');
     let name = ctx.request.body.username;
     let accepted = verifyUsername(name);
     [ctx.status, ctx.body] = accepted ? [200, getUserLimitedDetails(IDfromUsername(name))]
-      : [401, {msg: 'No user found'}];
+      : [401, { msg: 'No user found' }];
     if (accepted) console.log('login successful');
   },
   createNewChild: (ctx: any) => {
